@@ -1,7 +1,7 @@
 {
-  "name": "@auth-tools/template",
+  "name": "@auth-tools/base",
   "version": "0.0.0",
-  "description": "A structured authentication protocol for Javascript. (template)",
+  "description": "A structured authentication protocol for Javascript. (base)",
   "main": "dist/index.js",
   "repository": "https://github.com/auth-tools/auth-tools",
   "author": "Laurenz Rausche <laurenz@laurenz-rausche.de>",
@@ -16,7 +16,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@auth-tools/template": "link:.",
+    "@auth-tools/base": "link:.",
     "rimraf": "^5.0.5",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.4.5"
