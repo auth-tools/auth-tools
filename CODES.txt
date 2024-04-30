@@ -1,0 +1,52 @@
+AUTH STATUS CODES
+
+CODE -> INTERCEPT -> HTTP -> DESCRIPTION
+0    -> 0         -> ANY  -> AUTH OK
+1    -> 0         -> 400  -> ACCESSTOKEN MISSING
+2    -> 0         -> 403  -> THE ACCESSTOKEN IS INVALID
+5    -> 0         -> 500  -> SERVER ERROR
+
+10   -> 0         -> 201  -> REGISTER SUCCESSFULL
+11   -> 0         -> 403  -> REGISTER ROUTE DISABLED
+12   -> 0         -> 400  -> EMAIL, USERNAME OR PASSWORD MISSING
+13   -> 0         -> 406  -> THE EMAIL IS MALFORMATED
+14   -> 0         -> 406  -> THE PASSWORD IS TO WEAK
+15   -> 0         -> 403  -> THE EMAIL IS ALREDY USED (in unsensitive mode)
+16   -> 0         -> 403  -> THE USERNAME IS ALREDY USED (in unsensitive mode)
+17   -> 0         -> 403  -> THE LOGIN IS ALREDY USED (in sensitive mode)
+...
+19   -> CUSTOM    -> 403  -> THE REQUEST TO REGISTER WAS INTERCEPTED
+
+20   -> 0         -> 201  -> LOGIN SUCCESSFULL
+21   -> 0         -> 403  -> LOGIN ROUTE DISABLED
+22   -> 0         -> 400  -> LOGIN OR PASSWORD MISSING
+23   -> 0         -> 404  -> USER WAS NOT FOUND (in unsensitive mode)
+24   -> 0         -> 403  -> PASSWORD IS INCORRECT (in unsensitive mode)
+25   -> 0         -> 403  -> USER WAS NOT FOUND OR PASSWORD IS INCORRECT (in sensitive mode)
+...
+29   -> CUSTOM    -> 403  -> THE REQUEST TO LOGIN WAS INTERCEPTED
+
+30   -> 0         -> 200  -> LOGOUT SUCCESSFULL
+31   -> 0         -> 403  -> LOGOUT ROUTE DISABLED
+32   -> 0         -> 400  -> REFRESHTOKEN MISSING
+33   -> 0         -> 403  -> THE REFRESHTOKEN IS INVALID
+34   -> 0         -> 404  -> THE REFRESHTOKEN DOES NOT EXIST
+...
+39   -> CUSTOM    -> 403  -> THE REQUEST TO LOGOUT WAS INTERCEPTED
+
+40   -> 0         -> 201  -> REFRESH SUCCESSFULL
+41   -> 0         -> 403  -> REFRESH ROUTE DISABLED
+42   -> 0         -> 400  -> REFRESHTOKEN MISSING
+43   -> 0         -> 403  -> THE REFRESHTOKEN IS INVALID
+44   -> 0         -> 404  -> THE REFRESHTOKEN DOES NOT EXIST
+...
+49   -> CUSTOM    -> 403  -> THE REQUEST TO REFRESH WAS INTERCEPTED
+
+50   -> 0         -> 200  -> CHECK SUCCESSFULL 
+51   -> 0         -> 403  -> CHECK ROUTE DISABLED
+52   -> 0         -> 400  -> ACCESSTOKEN OR REFRESHTOKEN MISSING
+53   -> 0         -> 403  -> THE REFRESHTOKEN IS INVALID
+54   -> 0         -> 404  -> THE REFRESHTOKEN DOES NOT EXIST
+55   -> 0         -> 403  -> THE ACCESSTOKEN IS INVALID
+...
+59   -> CUSTOM    -> 403  -> THE REQUEST TO CHECK WAS INTERCEPTED
