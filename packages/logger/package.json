@@ -1,6 +1,6 @@
 {
   "name": "@auth-tools/logger",
-  "version": "0.0.0",
+  "version": "0.0.1-alpha.1",
   "description": "A structured authentication protocol for Javascript. (logger)",
   "main": "dist/index.js",
   "repository": "https://github.com/auth-tools/auth-tools",
