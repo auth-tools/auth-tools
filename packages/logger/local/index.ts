@@ -6,7 +6,10 @@ DefaultLogger.log("warn", `"warn" log with DefaultLogger`);
 DefaultLogger.log("error", `"error" log with DefaultLogger`);
 
 //set config after creation
-DefaultLogger.setConfig({ disableColor: true, formatString: "Color disabled: [%l] %d %m" });
+DefaultLogger.setConfig({
+  disableColor: true,
+  formatString: "Color disabled: [%l] %d %m",
+});
 
 //log shorthands
 DefaultLogger.debug(`"debug" log with DefaultLogger and updated config`);
