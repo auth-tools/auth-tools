@@ -9,7 +9,7 @@
   "private": false,
   "scripts": {
     "build": "npm run build:remove && tsc",
-    "build:remove": "rimraf build",
+    "build:remove": "rimraf dist",
     "local": "npm run build && ts-node-dev --respawn local/index.ts",
     "prepublish": "npm run build",
     "remove": "npm run build:remove && rimraf node_modules yarn.lock package-lock.json pnpm-lock.yaml"
