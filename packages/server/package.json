@@ -1,0 +1,28 @@
+{
+  "name": "@auth-tools/server",
+  "version": "0.0.0",
+  "description": "A structured authentication protocol for Javascript. (server)",
+  "main": "dist/index.js",
+  "repository": "https://github.com/auth-tools/auth-tools",
+  "author": "Laurenz Rausche <laurenz@laurenz-rausche.de>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "npm run build:remove && tsc",
+    "build:remove": "rimraf dist",
+    "local": "npm run build && ts-node-dev --respawn local/index.ts",
+    "prepublish": "npm run build",
+    "remove": "npm run build:remove && rimraf node_modules yarn.lock package-lock.json pnpm-lock.yaml"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@auth-tools/server": "link:.",
+    "rimraf": "^5.0.5",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.4.5"
+  },
+  "peerDependencies": {},
+  "files": [
+    "dist"
+  ]
+}
