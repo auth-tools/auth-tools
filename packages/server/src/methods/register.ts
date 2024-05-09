@@ -130,12 +130,11 @@ export function createRegister(
       if (storeUser.serverError) return authServerError();
 
       return {
-        auth: {
-          error: false,
-          errorType: "method",
-          message: "Registration successful.",
-          codes: { status: 0, intercept: 0 },
-        },
+        error: false,
+        intercepted: false,
+        errorType: "method",
+        message: "Registration successful.",
+        codes: { status: 0, intercept: 0 },
         data: { id: user.id, email: user.email, username: user.username },
       };
     } catch (error) {

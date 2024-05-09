@@ -113,12 +113,11 @@ export function createLogin(
       if (storeToken.serverError) return authServerError();
 
       return {
-        auth: {
-          error: false,
-          errorType: "method",
-          message: "Login successful.",
-          codes: { status: 0, intercept: 0 },
-        },
+        error: false,
+        intercepted: false,
+        errorType: "method",
+        message: "Login successful.",
+        codes: { status: 0, intercept: 0 },
         data: { accessToken, refreshToken },
       };
     } catch (error) {

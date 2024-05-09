@@ -82,12 +82,11 @@ export function createCheck(
         );
 
       return {
-        auth: {
-          error: false,
-          errorType: "method",
-          message: "Check successful.",
-          codes: { status: 0, intercept: 0 },
-        },
+        error: false,
+        intercepted: false,
+        errorType: "method",
+        message: "Check successful.",
+        codes: { status: 0, intercept: 0 },
         data: null,
       };
     } catch (error) {

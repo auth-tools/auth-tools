@@ -1,6 +1,10 @@
 import { UserData } from "@auth-tools/base";
 import { Logger } from "@auth-tools/logger";
-import { AuthServer, AuthServerConfig } from "@auth-tools/server";
+import {
+  AuthServer,
+  AuthServerConfig,
+  AuthServerMethod,
+} from "@auth-tools/server";
 
 const Users: UserData[] = [];
 const Tokens: string[] = [];
@@ -70,3 +74,12 @@ authServer.use("genId", ({}) => {
   const id = Users.length.toString();
   return { serverError: false, id };
 });
+(async () => {
+  console.log(
+    await (authServer.methods.register as AuthServerMethod<"register">)({
+      email: "as@as",
+      username: "as",
+      password: "sd",
+    })
+  );
+})();

@@ -71,12 +71,11 @@ export function createLogout(
       if (deleteToken.serverError) return authServerError();
 
       return {
-        auth: {
-          error: false,
-          errorType: "method",
-          message: "Logout successful.",
-          codes: { status: 0, intercept: 0 },
-        },
+        error: false,
+        intercepted: false,
+        errorType: "method",
+        message: "Logout successful.",
+        codes: { status: 0, intercept: 0 },
         data: null,
       };
     } catch (error) {

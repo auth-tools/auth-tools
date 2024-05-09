@@ -19,14 +19,13 @@ type AuthResponseBuilder<
   InterceptCode extends number = 0,
   AuthMessage = AuthMessages[`${Method}_${StatusCode}`]
 > = {
-  auth: {
-    error: StatusCode extends 0 ? false : true;
-    errorType: Method extends "server" ? "server" : "method";
-    message: AuthMessage;
-    codes: {
-      status: StatusCode;
-      intercept: InterceptCode;
-    };
+  error: StatusCode extends 0 ? false : true;
+  intercepted: InterceptCode extends 0 ? false : true,
+  errorType: Method extends "server" ? "server" : "method";
+  message: AuthMessage;
+  codes: {
+    status: StatusCode;
+    intercept: InterceptCode;
   };
   data: ResponseData;
 };
