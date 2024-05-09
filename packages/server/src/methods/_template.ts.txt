@@ -1,0 +1,31 @@
+import { AuthInternal } from "@auth-tools/base";
+import {
+  AuthServerConfig,
+  AuthServerInterceptEvents,
+  AuthServerMethod,
+  AuthServerUseEvents,
+} from "../auth";
+import { authError, authServerError } from "../senders";
+
+//create _method method
+export function create_Method(
+  internal: AuthInternal<
+    AuthServerConfig,
+    AuthServerUseEvents,
+    AuthServerInterceptEvents
+  >
+): AuthServerMethod<"_method"> {
+  return async ({}) => {
+    //_method method is disabled
+    if (internal.config.methods._method === "disabled") {
+      internal.log("debug", "The _method method is disabled.");
+      return authError<"_method", 1>(1, "The _method method is disabled.");
+    }
+
+    try {
+    } catch (error) {
+      internal.log("warn", String(error));
+      return authServerError();
+    }
+  };
+}
