@@ -43,7 +43,7 @@ export function createLogout(
         refreshToken,
       });
 
-      if (checkToken.serverError) return authServerError();
+      if (checkToken.error) return authServerError();
 
       if (!checkToken.exists) {
         internal.log("debug", 'The "refreshToken" does not exist.');
@@ -55,7 +55,7 @@ export function createLogout(
         payload: { id: decodeRefreshToken.payload.id },
       });
 
-      if (intercept.serverError) return authServerError();
+      if (intercept.error) return authServerError();
 
       if (intercept.intercepted)
         return authError<"logout", 9>(
@@ -68,7 +68,7 @@ export function createLogout(
         refreshToken,
       });
 
-      if (deleteToken.serverError) return authServerError();
+      if (deleteToken.error) return authServerError();
 
       return {
         error: false,

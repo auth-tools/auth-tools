@@ -49,7 +49,7 @@ export function createCheck(
         refreshToken,
       });
 
-      if (checkToken.serverError) return authServerError();
+      if (checkToken.error) return authServerError();
 
       if (!checkToken.exists) {
         internal.log("debug", 'The "refreshToken" does not exist.');
@@ -72,7 +72,7 @@ export function createCheck(
         payload: { id: decodeAccessToken.payload.id },
       });
 
-      if (intercept.serverError) return authServerError();
+      if (intercept.error) return authServerError();
 
       if (intercept.intercepted)
         return authError<"check", 9>(

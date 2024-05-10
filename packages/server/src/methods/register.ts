@@ -42,7 +42,7 @@ export function createRegister(
         email,
       });
 
-      if (validateMail.serverError) return authServerError();
+      if (validateMail.error) return authServerError();
 
       if (!validateMail.isValid) {
         internal.log("debug", 'The "email" is malformed.');
@@ -54,7 +54,7 @@ export function createRegister(
           password,
         });
 
-      if (validatePassword.serverError) return authServerError();
+      if (validatePassword.error) return authServerError();
 
       if (!validatePassword.isValid) {
         internal.log("debug", 'The "password" is too weak.');
@@ -63,7 +63,7 @@ export function createRegister(
 
       const getUserByLoginEmail = await getUserByLogin(email, internal);
 
-      if (getUserByLoginEmail.serverError) return authServerError();
+      if (getUserByLoginEmail.error) return authServerError();
 
       if (getUserByLoginEmail.user) {
         if (internal.config.sensitive.logs)
@@ -77,7 +77,7 @@ export function createRegister(
 
       const getUserByLoginName = await getUserByLogin(username, internal);
 
-      if (getUserByLoginName.serverError) return authServerError();
+      if (getUserByLoginName.error) return authServerError();
 
       if (getUserByLoginName.user) {
         if (internal.config.sensitive.logs)
@@ -96,14 +96,14 @@ export function createRegister(
         password,
       });
 
-      if (hashPassword.serverError) return authServerError();
+      if (hashPassword.error) return authServerError();
 
       const genId = await internal.useEventCallbacks.genId({
         email,
         username,
       });
 
-      if (genId.serverError) return authServerError();
+      if (genId.error) return authServerError();
 
       const user: User<"id" | "email" | "username" | "hashedPassword"> = {
         id: genId.id,
@@ -116,7 +116,7 @@ export function createRegister(
         user,
       });
 
-      if (intercept.serverError) return authServerError();
+      if (intercept.error) return authServerError();
 
       if (intercept.intercepted)
         return authError<"register", 9>(
@@ -127,7 +127,7 @@ export function createRegister(
 
       const storeUser = await internal.useEventCallbacks.storeUser({ user });
 
-      if (storeUser.serverError) return authServerError();
+      if (storeUser.error) return authServerError();
 
       return {
         error: false,

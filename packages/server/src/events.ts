@@ -14,7 +14,7 @@ export function undefinedUseEvent<
   return (() => {
     //complain about unset use event callback
     log("error", `The use "${event}" event is not defined!`);
-    return { ...returnData, serverError: true };
+    return { ...returnData, error: true };
   }) as UseEventCallbacks<AuthServerUseEvents>[Event];
 }
 
@@ -23,6 +23,6 @@ export function undefinedInterceptEvent<
   Event extends keyof AuthServerInterceptEvents
 >(): InterceptEventCallbacks<AuthServerInterceptEvents>[Event] {
   return () => {
-    return { serverError: false, intercepted: false, interceptCode: 0 };
+    return { error: false, intercepted: false, interceptCode: 0 };
   };
 }
