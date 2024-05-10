@@ -83,7 +83,6 @@ export type AuthProtocol = {
       validate_1: AuthResponseBuilder<"validate", 1, null>;
       validate_2: AuthResponseBuilder<"validate", 2, null>;
       validate_3: AuthResponseBuilder<"validate", 3, null>;
-      validate_9: AuthResponseBuilder<"validate", 9, null, number>;
     }
   >;
   register: AuthMethodBuilder<

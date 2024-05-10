@@ -1,0 +1,13 @@
+import { AuthInternal } from "@auth-tools/base";
+import {
+  AuthClientConfig,
+  AuthClientMethod,
+  AuthClientUseEvents,
+} from "../auth";
+
+//create _method method
+export function create_Method(
+  internal: AuthInternal<AuthClientConfig, AuthClientUseEvents, {}>
+): AuthClientMethod<"_method"> {
+  return async ({}) => {};
+}

@@ -14,7 +14,7 @@ export type UseEventsDefinition = {
 //data for an use event
 type UseEvent<ClassUseEvents extends UseEventDefinition> = {
   data: ClassUseEvents["data"];
-  return: { serverError?: boolean } & ClassUseEvents["return"];
+  return: { error?: boolean } & ClassUseEvents["return"];
 };
 
 //all use events
