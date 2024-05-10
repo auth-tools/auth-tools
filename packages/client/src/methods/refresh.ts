@@ -15,12 +15,11 @@ export function createRefresh(
       type: "refreshToken",
     });
 
-    if (getRefreshToken.error || getRefreshToken.token === null)
-      return { clientError: true, res: null };
+    if (getRefreshToken.error) return { clientError: true, res: null };
 
     const refreshResponse = await (
       internal.config.connector as AuthClientConnector<"refresh">
-    )("refresh", { refreshToken: getRefreshToken.token });
+    )("refresh", { refreshToken: getRefreshToken.token || undefined });
 
     if (!refreshResponse.clientError && !refreshResponse.res.error) {
       internal.useEventCallbacks.storeToken({

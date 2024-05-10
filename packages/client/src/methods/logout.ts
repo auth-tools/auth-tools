@@ -15,12 +15,11 @@ export function createLogout(
       type: "refreshToken",
     });
 
-    if (getRefreshToken.error || getRefreshToken.token === null)
-      return { clientError: true, res: null };
+    if (getRefreshToken.error) return { clientError: true, res: null };
 
     const logoutResponse = await (
       internal.config.connector as AuthClientConnector<"logout">
-    )("logout", { refreshToken: getRefreshToken.token });
+    )("logout", { refreshToken: getRefreshToken.token || undefined });
 
     if (!logoutResponse.clientError && !logoutResponse.res.error) {
       internal.useEventCallbacks.deleteToken({

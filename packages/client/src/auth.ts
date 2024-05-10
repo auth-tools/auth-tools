@@ -9,7 +9,6 @@ import {
 } from "@auth-tools/base";
 import { LogFunction } from "@auth-tools/logger";
 import { undefinedUseEvent } from "./events";
-import { createValidate } from "./methods/validate";
 import { createRegister } from "./methods/register";
 import { createLogin } from "./methods/login";
 import { createLogout } from "./methods/logout";
@@ -67,7 +66,7 @@ export class AuthClient extends AuthBase<
   {}
 > {
   //all methods
-  public methods: AuthClientMethods;
+  public methods: Omit<AuthClientMethods, "validate">;
 
   constructor(config: AuthClientConfig, log: LogFunction) {
     //defaults for use event callbacks
@@ -82,7 +81,6 @@ export class AuthClient extends AuthBase<
 
     //all auth methods
     this.methods = {
-      validate: createValidate(this._internal),
       register: createRegister(this._internal),
       login: createLogin(this._internal),
       logout: createLogout(this._internal),

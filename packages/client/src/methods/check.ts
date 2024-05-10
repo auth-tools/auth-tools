@@ -15,21 +15,19 @@ export function createCheck(
       type: "refreshToken",
     });
 
-    if (getRefreshToken.error || getRefreshToken.token === null)
-      return { clientError: true, res: null };
+    if (getRefreshToken.error) return { clientError: true, res: null };
 
     const getAccessToken = await internal.useEventCallbacks.getToken({
       type: "accessToken",
     });
 
-    if (getAccessToken.error || getAccessToken.token === null)
-      return { clientError: true, res: null };
+    if (getAccessToken.error) return { clientError: true, res: null };
 
     const checkResponse = await (
       internal.config.connector as AuthClientConnector<"check">
     )("check", {
-      accessToken: getAccessToken.token,
-      refreshToken: getRefreshToken.token,
+      accessToken: getAccessToken.token || undefined,
+      refreshToken: getRefreshToken.token || undefined,
     });
 
     return checkResponse;
