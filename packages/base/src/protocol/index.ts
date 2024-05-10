@@ -19,14 +19,13 @@ type AuthResponseBuilder<
   InterceptCode extends number = 0,
   AuthMessage = AuthMessages[`${Method}_${StatusCode}`]
 > = {
-  auth: {
-    error: StatusCode extends 0 ? false : true;
-    errorType: Method extends "server" ? "server" : "method";
-    message: AuthMessage;
-    codes: {
-      status: StatusCode;
-      intercept: InterceptCode;
-    };
+  error: StatusCode extends 0 ? false : true;
+  intercepted: InterceptCode extends 0 ? false : true,
+  errorType: Method extends "server" ? "server" : "method";
+  message: AuthMessage;
+  codes: {
+    status: StatusCode;
+    intercept: InterceptCode;
   };
   data: ResponseData;
 };
@@ -84,7 +83,6 @@ export type AuthProtocol = {
       validate_1: AuthResponseBuilder<"validate", 1, null>;
       validate_2: AuthResponseBuilder<"validate", 2, null>;
       validate_3: AuthResponseBuilder<"validate", 3, null>;
-      validate_9: AuthResponseBuilder<"validate", 9, null, number>;
     }
   >;
   register: AuthMethodBuilder<

@@ -5,7 +5,6 @@ export type AuthMessages = {
   validate_1: "The validation method is disabled.";
   validate_2: 'The "accessToken" is missing.';
   validate_3: 'The "accessToken" is invalid.';
-  validate_9: "The validation request was intercepted.";
   register_0: "Registration successful.";
   register_1: "The registration method is disabled.";
   register_2: 'The "email", "username" or "password" is missing.';

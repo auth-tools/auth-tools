@@ -38,7 +38,7 @@ export function createLogin(
 
       const getUserByLoginLogin = await getUserByLogin(login, internal);
 
-      if (getUserByLoginLogin.serverError) return authServerError();
+      if (getUserByLoginLogin.error) return authServerError();
 
       if (!getUserByLoginLogin.user) {
         if (internal.config.sensitive.logs)
@@ -60,7 +60,7 @@ export function createLogin(
         hashedPassword: getUserByLoginLogin.user.hashedPassword,
       });
 
-      if (checkPassword.serverError) return authServerError();
+      if (checkPassword.error) return authServerError();
 
       if (!checkPassword.matches) {
         if (internal.config.sensitive.logs)
@@ -97,7 +97,7 @@ export function createLogin(
         payload,
       });
 
-      if (intercept.serverError) return authServerError();
+      if (intercept.error) return authServerError();
 
       if (intercept.intercepted)
         return authError<"login", 9>(
@@ -110,15 +110,14 @@ export function createLogin(
         refreshToken,
       });
 
-      if (storeToken.serverError) return authServerError();
+      if (storeToken.error) return authServerError();
 
       return {
-        auth: {
-          error: false,
-          errorType: "method",
-          message: "Login successful.",
-          codes: { status: 0, intercept: 0 },
-        },
+        error: false,
+        intercepted: false,
+        errorType: "method",
+        message: "Login successful.",
+        codes: { status: 0, intercept: 0 },
         data: { accessToken, refreshToken },
       };
     } catch (error) {

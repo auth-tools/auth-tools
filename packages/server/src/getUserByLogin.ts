@@ -21,14 +21,14 @@ export default async function (
     email: login,
   });
 
-  if (getUserByMail.serverError) return { serverError: true, user: null };
+  if (getUserByMail.error) return { error: true, user: null };
 
   //get user by name with value of login
   const getUserByName = await internal.useEventCallbacks.getUserByName({
     username: login,
   });
 
-  if (getUserByName.serverError) return { serverError: true, user: null };
+  if (getUserByName.error) return { error: true, user: null };
 
-  return { serverError: false, user: getUserByMail.user || getUserByName.user };
+  return { error: false, user: getUserByMail.user || getUserByName.user };
 }

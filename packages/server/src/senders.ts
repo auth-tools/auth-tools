@@ -9,14 +9,13 @@ export function authError<
   interceptCode: number = 0
 ): AuthResponse<Method> {
   return {
-    auth: {
-      error: true,
-      errorType: "method",
-      message: message,
-      codes: {
-        status: statusCode,
-        intercept: interceptCode,
-      },
+    error: true,
+    intercepted: interceptCode === 0 ? false : true,
+    errorType: "method",
+    message: message,
+    codes: {
+      status: statusCode,
+      intercept: interceptCode,
     },
     data: null,
   } as AuthResponse<Method>;
@@ -24,12 +23,11 @@ export function authError<
 
 export function authServerError(): AuthProtocol[keyof AuthProtocol]["responses"]["server_5"] {
   return {
-    auth: {
-      error: true,
-      errorType: "server",
-      message: "An error occurred on the server. Please try again later.",
-      codes: { status: 5, intercept: 0 },
-    },
+    error: true,
+    intercepted: false,
+    errorType: "server",
+    message: "An error occurred on the server. Please try again later.",
+    codes: { status: 5, intercept: 0 },
     data: null,
   };
 }

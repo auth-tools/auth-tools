@@ -1,7 +1,7 @@
 {
-  "name": "@auth-tools/server",
-  "version": "0.0.1-alpha.7",
-  "description": "A structured authentication protocol for Javascript. (server)",
+  "name": "@auth-tools/express",
+  "version": "0.0.1-alpha.4",
+  "description": "A structured authentication protocol for Javascript. (express)",
   "main": "dist/index.js",
   "repository": "https://github.com/auth-tools/auth-tools",
   "author": "Laurenz Rausche <laurenz@laurenz-rausche.de>",
@@ -15,13 +15,12 @@
     "remove": "npm run build:remove && rimraf node_modules yarn.lock package-lock.json pnpm-lock.yaml"
   },
   "dependencies": {
-    "@auth-tools/base": "^0.0.1-alpha.8",
-    "jsonwebtoken": "^9.0.2"
+    "express": "^4.19.2"
   },
   "devDependencies": {
-    "@auth-tools/logger": "^0.0.1-alpha.1",
-    "@auth-tools/server": "link:.",
-    "@types/jsonwebtoken": "^9.0.6",
+    "@auth-tools/server": "^0.0.1-alpha.7",
+    "@auth-tools/express": "link:.",
+    "@types/express": "^4.17.21",
     "rimraf": "^5.0.5",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.4.5"

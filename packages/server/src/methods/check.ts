@@ -49,7 +49,7 @@ export function createCheck(
         refreshToken,
       });
 
-      if (checkToken.serverError) return authServerError();
+      if (checkToken.error) return authServerError();
 
       if (!checkToken.exists) {
         internal.log("debug", 'The "refreshToken" does not exist.');
@@ -57,7 +57,7 @@ export function createCheck(
       }
 
       const decodeAccessToken = decodeToken(
-        refreshToken,
+        accessToken,
         internal.config.secrets.accessToken
       );
 
@@ -72,7 +72,7 @@ export function createCheck(
         payload: { id: decodeAccessToken.payload.id },
       });
 
-      if (intercept.serverError) return authServerError();
+      if (intercept.error) return authServerError();
 
       if (intercept.intercepted)
         return authError<"check", 9>(
@@ -82,12 +82,11 @@ export function createCheck(
         );
 
       return {
-        auth: {
-          error: false,
-          errorType: "method",
-          message: "Check successful.",
-          codes: { status: 0, intercept: 0 },
-        },
+        error: false,
+        intercepted: false,
+        errorType: "method",
+        message: "Check successful.",
+        codes: { status: 0, intercept: 0 },
         data: null,
       };
     } catch (error) {

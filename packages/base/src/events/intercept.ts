@@ -14,7 +14,7 @@ export type InterceptEventsDefinition = {
 type InterceptEvent<ClassInterceptEvents extends InterceptEventDefinition> = {
   data: ClassInterceptEvents["data"];
   return: {
-    serverError?: boolean;
+    error?: boolean;
     intercepted: boolean;
     interceptCode: number;
   };

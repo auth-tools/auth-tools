@@ -43,7 +43,7 @@ export function createRefresh(
         refreshToken,
       });
 
-      if (checkToken.serverError) return authServerError();
+      if (checkToken.error) return authServerError();
 
       if (!checkToken.exists) {
         internal.log("debug", 'The "refreshToken" does not exist.');
@@ -55,7 +55,7 @@ export function createRefresh(
         payload: { id: decodeRefreshToken.payload.id },
       });
 
-      if (intercept.serverError) return authServerError();
+      if (intercept.error) return authServerError();
 
       if (intercept.intercepted)
         return authError<"refresh", 9>(
@@ -71,12 +71,11 @@ export function createRefresh(
       );
 
       return {
-        auth: {
-          error: false,
-          errorType: "method",
-          message: "Refresh successful.",
-          codes: { status: 0, intercept: 0 },
-        },
+        error: false,
+        intercepted: false,
+        errorType: "method",
+        message: "Refresh successful.",
+        codes: { status: 0, intercept: 0 },
         data: { accessToken },
       };
     } catch (error) {
