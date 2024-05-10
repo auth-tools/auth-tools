@@ -3,6 +3,7 @@ import {
   AuthProtocol,
   AuthRequest,
   AuthResponse,
+  Promisify,
   UseEventCallbacks,
   User,
 } from "@auth-tools/base";
@@ -22,7 +23,7 @@ type MethodReturn<MethodName extends keyof AuthProtocol> =
 export type AuthClientConnector<MethodName extends keyof AuthProtocol> = (
   method: MethodName,
   data: AuthRequest<MethodName>
-) => MethodReturn<MethodName>;
+) => Promisify<MethodReturn<MethodName>>;
 
 type TokenTypes = "accessToken" | "refreshToken";
 
