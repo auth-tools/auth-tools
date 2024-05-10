@@ -1,6 +1,6 @@
 {
   "name": "@auth-tools/express",
-  "version": "0.0.1-alpha.2",
+  "version": "0.0.1-alpha.3",
   "description": "A structured authentication protocol for Javascript. (express)",
   "main": "dist/index.js",
   "repository": "https://github.com/auth-tools/auth-tools",
