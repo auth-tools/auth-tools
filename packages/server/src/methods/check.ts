@@ -57,7 +57,7 @@ export function createCheck(
       }
 
       const decodeAccessToken = decodeToken(
-        refreshToken,
+        accessToken,
         internal.config.secrets.accessToken
       );
 

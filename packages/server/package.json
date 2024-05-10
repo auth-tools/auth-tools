@@ -1,6 +1,6 @@
 {
   "name": "@auth-tools/server",
-  "version": "0.0.1-alpha.6",
+  "version": "0.0.1-alpha.7",
   "description": "A structured authentication protocol for Javascript. (server)",
   "main": "dist/index.js",
   "repository": "https://github.com/auth-tools/auth-tools",
