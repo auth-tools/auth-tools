@@ -15,7 +15,7 @@ import { createLogout } from "./methods/logout";
 import { createRefresh } from "./methods/refresh";
 import { createCheck } from "./methods/check";
 
-type MethodReturn<MethodName extends keyof AuthProtocol> =
+export type MethodReturn<MethodName extends keyof AuthProtocol> =
   | { clientError: true; res: null }
   | { clientError: false; res: AuthResponse<MethodName> };
 
@@ -87,5 +87,22 @@ export class AuthClient extends AuthBase<
       refresh: createRefresh(this._internal),
       check: createCheck(this._internal),
     };
+  }
+
+  //check if user is logged in
+  public async isLoggedIn(): Promise<boolean> {
+    const checkResponse = await (
+      this._internal.config.connector as AuthClientConnector<"check">
+    )("check", {});
+
+    if (checkResponse.clientError) return false;
+    if (!checkResponse.res.error) return true;
+
+    const refreshResponse = await (
+      this._internal.config.connector as AuthClientConnector<"refresh">
+    )("refresh", {});
+
+    if (refreshResponse.clientError) return false;
+    return !refreshResponse.res.error;
   }
 }
