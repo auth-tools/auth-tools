@@ -93,19 +93,15 @@ export class AuthClient extends AuthBase<
 
   //check if user is logged in
   public async isLoggedIn(): Promise<boolean> {
-    const checkResponse = await (
-      this._internal.config.connector as AuthClientConnector<"check">
-    )("check", {});
+    const checkResponse = await this.methods.check({});
 
-    if (checkResponse.clientError) return false;
-    if (!checkResponse.res.error) return true;
+    if (checkResponse.clientError || checkResponse.res.error) return false;
 
-    const refreshResponse = await (
-      this._internal.config.connector as AuthClientConnector<"refresh">
-    )("refresh", {});
+    const refreshResponse = await this.methods.refresh({});
 
-    if (refreshResponse.clientError) return false;
-    return !refreshResponse.res.error;
+    if (refreshResponse.clientError || refreshResponse.res.error) return false;
+
+    return true;
   }
 
   //get token payload
