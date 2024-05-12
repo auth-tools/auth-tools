@@ -3,11 +3,13 @@ import {
   AuthProtocol,
   AuthRequest,
   AuthResponse,
+  Payload,
   Promisify,
   UseEventCallbacks,
   User,
 } from "@auth-tools/base";
 import { LogFunction } from "@auth-tools/logger";
+import { JwtPayload, jwtDecode } from "jwt-decode";
 import { undefinedUseEvent } from "./events";
 import { createRegister } from "./methods/register";
 import { createLogin } from "./methods/login";
@@ -104,5 +106,18 @@ export class AuthClient extends AuthBase<
 
     if (refreshResponse.clientError) return false;
     return !refreshResponse.res.error;
+  }
+
+  //get token payload
+  public async userPayload(): Promise<Payload | null> {
+    const getRefreshToken = await this._internal.useEventCallbacks.getToken({
+      type: "refreshToken",
+    });
+
+    if (getRefreshToken.error || getRefreshToken.token === null) return null;
+
+    const tokenData = jwtDecode<JwtPayload & Payload>(getRefreshToken.token);
+
+    return { id: tokenData.id };
   }
 }
