@@ -95,13 +95,16 @@ export class AuthClient extends AuthBase<
   public async isLoggedIn(): Promise<boolean> {
     const checkResponse = await this.methods.check({});
 
-    if (checkResponse.clientError || checkResponse.res.error) return false;
+    if (checkResponse.clientError) return false;
+
+    if (!checkResponse.res.error) return true;
 
     const refreshResponse = await this.methods.refresh({});
 
-    if (refreshResponse.clientError || refreshResponse.res.error) return false;
+    if (refreshResponse.clientError) return false;
 
-    return true;
+    if (!refreshResponse.res.error) return true;
+    else return false;
   }
 
   //get token payload
